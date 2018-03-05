@@ -1,0 +1,45 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb-base"],
+  "rules": {
+    "eol-last": ["error", "always"],
+    "import/no-unresolved": "error",
+    "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
+    "indent": [
+      "error",
+      2,
+      {
+        "FunctionDeclaration": { "body": 1, "parameters": 1 },
+        "FunctionExpression": { "body": 1, "parameters": 1 },
+        "SwitchCase": 1
+      }
+    ],
+    "max-len": ["error", 120],
+    "multiline-ternary": ["error", "always-multiline"],
+    "no-case-declarations": "error",
+    "no-console": 1,
+    "no-mixed-operators": 2,
+    "no-multiple-empty-lines": [
+      2,
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "no-shadow": "warn",
+    "operator-linebreak": ["error", "before"],
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false
+    }],
+    "linebreak-style": 0
+  },
+  "globals": {
+    "NODE_ENV": true,
+    "window": true
+  },
+  "env": {
+    "browser": true
+  }
+}
