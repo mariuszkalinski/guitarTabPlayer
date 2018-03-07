@@ -1,3 +1,5 @@
+import { generateSound } from './audioService';
+
 export const notesData = [
   {
     colour: '#05EFFF',
@@ -7,6 +9,8 @@ export const notesData = [
     left: 15,
     frequency: 330,
     name: 'E',
+    fill: 'red',
+    callback() { return generateSound(this.frequency); },
   },
   {
     colour: '#05EFFF',
@@ -16,6 +20,8 @@ export const notesData = [
     left: 75,
     frequency: 247,
     name: 'H',
+    fill: 'red',
+    callback() { return generateSound(this.frequency); },
   },
   {
     colour: '#05EFFF',
@@ -25,6 +31,8 @@ export const notesData = [
     left: 135,
     frequency: 196,
     name: 'G',
+    fill: 'red',
+    callback() { return generateSound(this.frequency); },
   },
   {
     colour: '#05EFFF',
@@ -34,6 +42,8 @@ export const notesData = [
     left: 195,
     frequency: 147,
     name: 'D',
+    fill: 'red',
+    callback() { return generateSound(this.frequency); },
   },
   {
     colour: '#05EFFF',
@@ -43,6 +53,8 @@ export const notesData = [
     left: 255,
     frequency: 110,
     name: 'A',
+    fill: 'red',
+    callback() { return generateSound(this.frequency); },
   },
   {
     colour: '#05EFFF',
@@ -52,5 +64,7 @@ export const notesData = [
     left: 315,
     frequency: 82,
     name: 'E',
+    fill: 'red',
+    callback() { return generateSound(this.frequency); },
   },
 ];
