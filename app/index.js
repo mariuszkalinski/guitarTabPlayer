@@ -1,22 +1,27 @@
-import { State } from './state/mainState';
+// import { State } from './state/mainState';
 
-import { notesData } from './notesData';
-import { generateCanvasView } from './view';
+import { notesFrequencies } from './data/notesFrequencies';
+import { generateGuitarView } from './view';
 
-const appState = new State();
+const width = 60;
+const height = 60;
 
-console.log(appState.getState);
+// const appState = new State();
 
-const controlls = [
-  {
-    left: 400,
-    top: 10,
-    width: 30,
-    height: 30,
-    fill: 'yellow',
-    callback() { appState.setState = { noteDuration: 2 }; console.log(appState.getState); },
-  },
-];
+// console.log(appState.getState);
 
-generateCanvasView('myCanvas', [...notesData, ...controlls]);
+const createContext = (id) => {
+  const elem = document.getElementById(id);
+  const elemLeft = elem.offsetLeft;
+  const elemTop = elem.offsetTop;
+  const context = elem.getContext('2d');
 
+  return {
+    elem,
+    elemLeft,
+    elemTop,
+    context,
+  };
+};
+
+generateGuitarView(createContext('myCanvas'), notesFrequencies, width, height);
