@@ -102,11 +102,18 @@ export const STRINGS_PROPERTIES = [
 
 export const stringFrequencyFormula = (stringsData, fretsDistance) => {
   let fretboardData = [];
-  fretsDistance.forEach((distance) => {
-    stringsData.forEach((string) => {
+  fretsDistance.forEach((distance, distanceIndex) => {
+    stringsData.forEach((string, stringIndex) => {
       const { tension, unitWeight } = string;
-      const frequency = (1 / distance / 2) * (Math.sqrt(tension / unitWeight));
-      fretboardData = [...fretboardData, frequency];
+      const frequency = Math.round((1 / distance / 2) * (Math.sqrt(tension / unitWeight)));
+      fretboardData = [
+        ...fretboardData,
+        {
+          coordinates: [distanceIndex, stringIndex],
+          note: 'A',
+          frequency,
+        },
+      ];
     });
   });
   return fretboardData;

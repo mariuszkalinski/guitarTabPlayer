@@ -1,7 +1,9 @@
 // import { State } from './state/mainState';
 
-import { notesFrequencies } from './data/notesFrequencies';
+// import { notesFrequencies } from './data/notesFrequencies';
 import { generateGuitarView } from './view';
+
+import { stringFrequencyFormula, STRINGS_PROPERTIES, FRETS_DISTANCE } from './audioService';
 
 const width = 60;
 const height = 60;
@@ -24,4 +26,9 @@ const createContext = (id) => {
   };
 };
 
-generateGuitarView(createContext('myCanvas'), notesFrequencies, width, height);
+generateGuitarView(
+  createContext('myCanvas'),
+  stringFrequencyFormula(STRINGS_PROPERTIES, FRETS_DISTANCE),
+  width,
+  height,
+);
