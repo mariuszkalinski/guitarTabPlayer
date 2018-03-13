@@ -1,11 +1,13 @@
-export const setCoords = (x, y, width, height) => {
-  const firstRowTopPosition = 0;
+export const setCoords = (currentPosition, width, index) => {
+  if (!index) {
+    return {
+      leftPosition: 0,
+    };
+  }
 
-  const leftPosition = x * width;
-  const topPosition = firstRowTopPosition + (y * height);
+  const leftPosition = currentPosition + width;
 
   return {
     leftPosition,
-    topPosition,
   };
 };
