@@ -6,7 +6,8 @@
   "author": "mariuszkalinskiifm <maniek.kalinski@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
