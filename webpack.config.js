@@ -26,6 +26,15 @@ const config = {
           'eslint-loader',
         ],
       },
+      {
+        test: /\.svg$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [
+          {
+            loader: 'raw-loader',
+          },
+        ],
+      },
     ],
   },
   devServer: {

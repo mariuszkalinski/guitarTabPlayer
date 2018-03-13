@@ -4,6 +4,8 @@ import { setCoords } from '../helpers/setCoords';
 
 import { dotsData } from '../data/dotsData';
 
+// import guitarSvg from '../assets/guitar.svg';
+
 let currentFrequency = null;
 
 const generateGuitarView = (getContext, data, width, height) => {
@@ -13,6 +15,30 @@ const generateGuitarView = (getContext, data, width, height) => {
     elemTop,
     context,
   } = getContext;
+
+  // const imgData = encodeURIComponent(guitarSvg);
+
+  // const img = new Image();
+
+  // img.onload = () => {
+  //   context.drawImage(img, 0, 0);
+
+  //   elem.toBlob((blob) => {
+  //     const newImg = document.createElement('img');
+  //     const url = URL.createObjectURL(blob);
+
+  //     newImg.onload = () => {
+  //       URL.revokeObjectURL(url);
+  //     };
+
+  //     newImg.src = url;
+  //     document.body.appendChild(newImg);
+  //   });
+  // };
+
+  // img.src = `data:image/svg+xml,${imgData}`;
+
+  context.fillRect(0, 10, 53, 221);
 
   elem.addEventListener('click', (event) => {
     const x = event.pageX - elemLeft;
