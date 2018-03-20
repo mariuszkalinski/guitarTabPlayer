@@ -35,12 +35,26 @@ const config = {
           },
         ],
       },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
     ],
   },
   devServer: {
     hot: true,
     inline: true,
-    port: 3000,
+    port: 4200,
     historyApiFallback: true,
   },
   plugins: [

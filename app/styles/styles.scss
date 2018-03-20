@@ -1,0 +1,19 @@
+@import 'variables';
+
+body {
+  background-color: $bg-moonrock;
+  position: relative;
+}
+
+.canvasContainer {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 81px;
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+}
