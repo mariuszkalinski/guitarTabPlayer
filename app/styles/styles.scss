@@ -3,17 +3,44 @@
 body {
   background-color: $bg-moonrock;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 
-.canvasContainer {
+canvas {
   width: 100%;
+  height: auto;
+}
+
+.container {
+  width: calc(100% - 100px);
   height: 500px;
   position: relative;
   display: flex;
   justify-content: center;
-  margin-top: 81px;
-  canvas {
-    width: 100%;
-    height: auto;
+  margin: 81px 50px;
+}
+
+.navigation {
+  height: 70px;
+  border-bottom: 1px solid $gray-dark;
+  display: flex;
+  justify-content: space-between;
+
+  &__container {
+    width: calc(100% - 100px);
+    margin: 0 50px;
+    display: flex;
+  }
+
+  &__logo {
+    color: $light;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

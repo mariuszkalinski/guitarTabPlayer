@@ -31,6 +31,7 @@
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "svg-inline-loader": "^0.8.0",
     "web-midi-api": "^1.4.4"
   }
 }
