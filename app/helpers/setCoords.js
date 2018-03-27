@@ -1,7 +1,7 @@
 export const setCoords = (currentPosition, width, index) => {
-  if (!index) {
+  if (index < 2) {
     return {
-      leftPosition: 0,
+      leftPosition: 51,
     };
   }
 

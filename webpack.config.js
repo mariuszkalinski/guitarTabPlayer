@@ -55,6 +55,7 @@ const config = {
       },
     ],
   },
+  devtool: 'cheap-eval-source-map',
   devServer: {
     hot: true,
     inline: true,
