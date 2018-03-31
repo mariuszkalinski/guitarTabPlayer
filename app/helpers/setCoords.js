@@ -5,7 +5,7 @@ export const setCoords = (currentPosition, width, index) => {
     };
   }
 
-  const leftPosition = currentPosition + width;
+  const leftPosition = currentPosition + width + 10;
 
   return {
     leftPosition,
