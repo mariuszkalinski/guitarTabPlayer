@@ -94,7 +94,7 @@ const generateGuitarView = (getContext, data, height) => {
       const { leftPosition } = setCoords(notePosition, width, elementIndex);
 
       elem.addEventListener('click', (event) => {
-        const x = (event.pageX) - (canvasLeftBorderPosition - elemLeft) - 60;
+        const x = (event.pageX) - (canvasLeftBorderPosition - elemLeft);
         const y = (event.pageY) - (elemTop + canvasTopBorderPosition);
 
         if (y > topPosition

@@ -7,17 +7,12 @@ body {
   padding: 0;
 }
 
-canvas {
-  width: auto;
-  height: auto;
-}
-
 .container {
   width: calc(100% - 100px);
-  height: 500px;
+  height: 350px;
   position: relative;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   margin: 81px 50px;
 }
 
