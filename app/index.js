@@ -1,6 +1,6 @@
 import { generateGuitarView } from './view';
 
-import { stringFrequencyFormula } from './audioService';
+import { stringFrequencyFormula } from './helpers/stringFrequency';
 import { FRETS_DISTANCE, STRINGS_PROPERTIES } from './consts';
 
 const height = 40;

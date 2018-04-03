@@ -1,9 +1,14 @@
-import { generateSound } from '../audioService';
+import { SoundGenerator } from '../audioService';
 import { generateDotsView } from './dots';
 import { setCoords } from '../helpers/setCoords';
 import { getFretSpacing } from '../helpers/getFretSpacing';
 import { FRETS_DISTANCE } from '../consts';
 import '../styles/styles.scss';
+
+const { AudioContext } = window;
+
+const audioContext = new AudioContext();
+const sound = new SoundGenerator(audioContext, true);
 
 const fretboardWidth = 1200;
 
@@ -102,7 +107,7 @@ const generateGuitarView = (getContext, data, height) => {
           && x > leftPosition
           && x < leftPosition + width) {
           if (frequency) {
-            generateSound(frequency);
+            sound.play(frequency);
           }
         }
       });

@@ -1,88 +1,54 @@
-const { AudioContext } = window;
+import { drawOsciloscope } from '../tools/osciloscope';
 
-const audioContext = new AudioContext();
-const analyser = audioContext.createAnalyser();
+export class SoundGenerator {
+  constructor(audioContext, debugSoundWave) {
+    this.sampleRate = audioContext.sampleRate;
+    this.processor = audioContext.createScriptProcessor(512, 0, 1);
+    this.playing = false;
+    this.analyser = audioContext.createAnalyser();
 
-analyser.fftSize = 2048;
-const bufferLength = analyser.frequencyBinCount;
-const dataArray = new Uint8Array(bufferLength);
-analyser.getByteTimeDomainData(dataArray);
+    if (debugSoundWave) {
+      const canvas = document.getElementById('oscilloscope');
 
-// Get a canvas defined with ID "oscilloscope"
-const canvas = document.getElementById('oscilloscope');
-const canvasCtx = canvas.getContext('2d');
+      drawOsciloscope(canvas, this.analyser);
 
-// draw an oscilloscope of the current audio source
-
-function draw() {
-  analyser.getByteTimeDomainData(dataArray);
-
-  canvasCtx.fillStyle = 'rgb(200, 200, 200)';
-  canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-
-  canvasCtx.lineWidth = 2;
-  canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
-
-  canvasCtx.beginPath();
-
-  const sliceWidth = (canvas.width * 1.0) / bufferLength;
-  let x = 0;
-
-  for (let i = 0; i < bufferLength; i += 1) {
-    const v = dataArray[i] / 128.0;
-    const y = (v * canvas.height) / 2;
-
-    if (i === 0) {
-      canvasCtx.moveTo(x, y);
+      this.analyser.connect(audioContext.destination);
+      this.processor.connect(this.analyser);
     } else {
-      canvasCtx.lineTo(x, y);
+      this.processor.connect(audioContext.destination);
     }
-
-    x += sliceWidth;
   }
 
-  canvasCtx.lineTo(canvas.width, canvas.height / 2);
-  canvasCtx.stroke();
+  play(frequency) {
+    const fundamentalFrequency = Math.round(this.sampleRate / frequency);
+    let impulse = this.sampleRate / 1000;
+    const float32 = new Float32Array(fundamentalFrequency);
+    let n = 0;
 
-  window.requestAnimationFrame(draw);
+    this.processor.onaudioprocess = (event) => {
+      const out = event.outputBuffer.getChannelData(0);
+      let i = 0;
+      let xn;
+
+      for (i; i < out.length; i += 1) {
+        impulse -= 1;
+        xn = impulse >= 0 ? Math.random() - 0.5 : 0;
+
+        const finalWave = xn + ((float32[n] + float32[(n + 1) % fundamentalFrequency]) / 2);
+
+        float32[n] = finalWave;
+        out[i] = finalWave;
+
+        n += 1;
+        if (n >= fundamentalFrequency || !this.playing) {
+          n = 0;
+        }
+      }
+    };
+
+    this.playing = true;
+  }
+  pause() {
+    this.playing = false;
+  }
 }
-
-draw();
-
-export function generateSound(frequency) {
-  const masterDry = audioContext.createGain();
-  masterDry.gain.value = 1;
-
-  const filter = audioContext.createBiquadFilter();
-  filter.type = 'lowpass';
-
-  const oscillator = audioContext.createOscillator();
-  oscillator.frequency.value = frequency;
-  oscillator.type = 'square';
-
-  oscillator.connect(masterDry);
-
-  masterDry.connect(audioContext.destination);
-  masterDry.connect(analyser);
-  oscillator.start(audioContext.currentTime);
-  oscillator.stop(audioContext.currentTime + 0.5);
-}
-
-export const stringFrequencyFormula = (stringsData, fretsDistance) => {
-  const fretboardData = [];
-  fretsDistance.forEach((distance, distanceIndex) => {
-    stringsData.forEach((string) => {
-      const { name, tension, unitWeight } = string;
-      const frequency = (1 / (distance * 2)) * (Math.sqrt(tension / unitWeight));
-      fretboardData[name] = [
-        ...fretboardData[name] || [],
-        {
-          xcoord: distanceIndex,
-          note: 'A',
-          frequency,
-        },
-      ];
-    });
-  });
-  return fretboardData;
-};
